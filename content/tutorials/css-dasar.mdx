@@ -1,0 +1,52 @@
+---
+title: "CSS Dasar yang Praktis"
+description: "Selektor, layout sederhana, dan tipografi minimal."
+date: "2024-08-07"
+tags: ["css", "web", "tutorial"]
+category: "tutorial"
+featured: true
+---
+
+CSS mengatur tampilan. Mulai dari selektor dasar dan layout sederhana.
+
+1) Selektor dasar
+
+```css
+h1 { font-size: 28px; }
+p { line-height: 1.8; }
+a { text-decoration: underline; }
+```
+
+2) Layout dengan Flexbox
+
+```css
+.row {
+  display: flex;
+  gap: 12px;
+}
+.card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+}
+```
+
+```html
+<div class="row">
+  <div class="card">A</div>
+  <div class="card">B</div>
+  <div class="card">C</div>
+</div>
+```
+
+3) Responsif sederhana
+
+```css
+@media (max-width: 640px) {
+  .row { flex-direction: column; }
+}
+```
+
+Kiat KISS: pakai properti yang sering dipakai dulu (spacing, warna, tipografi).
+
+

@@ -1,0 +1,47 @@
+---
+title: "JavaScript Dasar yang Penting"
+description: "Variabel, fungsi, event DOM untuk interaksi sederhana."
+date: "2024-08-08"
+tags: ["javascript", "web", "tutorial"]
+category: "tutorial"
+featured: true
+---
+
+Mulai dari hal yang langsung berguna di browser: manipulasi DOM dan event.
+
+1) Variabel & fungsi
+
+```js
+const title = "Halo";
+function sapa(nama) {
+  return `${title}, ${nama}!`;
+}
+```
+
+2) Event DOM
+
+```html
+<button id="btn">Klik saya</button>
+<p id="out"></p>
+<script>
+  const btn = document.getElementById('btn');
+  const out = document.getElementById('out');
+  btn.addEventListener('click', () => {
+    out.textContent = 'Terkilik!';
+  });
+</script>
+```
+
+3) Fetch data
+
+```js
+async function ambilData() {
+  const res = await fetch('https://api.example.com/data');
+  const json = await res.json();
+  console.log(json);
+}
+```
+
+Kiat KISS: kuasai dasar (tipe data, fungsi, event) sebelum framework.
+
+
