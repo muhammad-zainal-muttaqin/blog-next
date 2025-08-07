@@ -1,46 +1,76 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0b;
+  --foreground: #e8e8ea;
+  --muted: #a1a1b0;
+  --accent-1: #7c3aed; /* violet-600 */
+  --accent-2: #22d3ee; /* cyan-400 */
+  --glass: rgba(20, 20, 25, 0.6);
+  --ring: #a78bfa; /* violet-300 */
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-playfair);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root.light {
+  --background: #f6f7fb;
+  --foreground: #111114;
+  --muted: #4b5563;
+  --glass: rgba(255, 255, 255, 0.5);
 }
 
-:root.dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-}
-
+html, body { height: 100%; }
 body {
-  background: var(--background);
+  background: radial-gradient(1200px 700px at 20% -10%, rgba(124,58,237,.15), transparent 50%),
+              radial-gradient(1000px 600px at 120% 10%, rgba(34,211,238,.12), transparent 50%),
+              var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
 }
 
-/* Tipografi ringkas untuk konten MDX */
-.prose {
-  --tw-prose-body: var(--foreground);
+/* Nav modern */
+.header-glass {
+  background: var(--glass);
+  backdrop-filter: saturate(160%) blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,.06);
 }
-.prose h1, .prose h2, .prose h3 {
-  letter-spacing: -0.02em;
+
+/* Hero */
+.hero-card {
+  position: relative;
+  background: linear-gradient(120deg, rgba(124,58,237,.15), rgba(34,211,238,.10));
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 20px 60px rgba(0,0,0,.45);
 }
-.prose p {
-  line-height: 1.8;
+.hero-glare::after {
+  content: "";
+  position: absolute; inset: -1px;
+  background: radial-gradient(600px 200px at 80% 10%, rgba(124,58,237,.25), transparent 60%);
+  pointer-events: none;
 }
-.prose a {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
+
+h1, h2, h3 { letter-spacing: -0.02em; }
+.prose h1, .prose h2, .prose h3 { font-family: var(--font-serif); }
+
+/* Card hover 3D subtle */
+.card-3d { transition: transform .18s ease, box-shadow .18s ease; will-change: transform; }
+.card-3d:hover { transform: translateY(-3px) rotateX(0.6deg); box-shadow: 0 18px 40px rgba(0,0,0,.35); }
+
+/* Reveal on scroll (utility class; aktifkan via client) */
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
+.revealed { opacity: 1; transform: none; }
+
+/* Search field */
+.search-input { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); }
+.search-input:focus { outline: 2px solid var(--ring); }
+
+/* Code block */
+.prose pre { border-radius: 14px; border: 1px solid rgba(255,255,255,.10); background: #0b0b0f; }
+.prose code { font-family: var(--font-mono); }

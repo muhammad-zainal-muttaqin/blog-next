@@ -9,20 +9,18 @@ export default function Home() {
 
   return (
     <div className="space-y-10">
-      <section className="relative overflow-hidden rounded-3xl border border-black/5 dark:border-white/10 p-10 bg-gradient-to-br from-zinc-50 via-white to-sky-50 dark:from-zinc-900 dark:via-black dark:to-zinc-900">
-        <div className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-sky-400/30 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-fuchsia-400/20 blur-3xl" />
+      <section className="relative overflow-hidden rounded-3xl p-10 hero-card hero-glare">
         <div className="relative max-w-2xl">
-          <div className="inline-flex items-center gap-2 rounded-full bg-black/5 dark:bg-white/10 px-3 py-1 text-xs mb-4">
+          <div className="inline-flex items-center gap-2 rounded-full bg-black/20 px-3 py-1 text-xs mb-4 border border-white/10">
             <span>Next.js 15</span>
             <span>MDX</span>
             <span>Tailwind</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">Tulisan yang sederhana, bermanfaat, dan to the point.</h1>
+          <h1 className="font-[var(--font-playfair)] text-4xl sm:text-5xl font-bold tracking-tight">Tulisan yang sederhana, bermanfaat, dan to the point.</h1>
           <p className="mt-3 text-black/70 dark:text-white/70">Journal, tutorial, dan opini seputar teknologi dan kehidupan. Ditulis ringan dan KISS.</p>
           <div className="mt-6 flex gap-3">
-            <Link href="/blog" className="rounded-xl px-4 py-2 bg-black text-white dark:bg-white dark:text-black text-sm font-medium">Jelajahi Blog</Link>
-            <Link href="/about" className="rounded-xl px-4 py-2 border border-black/10 dark:border-white/20 text-sm">Tentang Penulis</Link>
+            <Link href="/blog" className="rounded-xl px-4 py-2 bg-white text-black dark:bg-white dark:text-black text-sm font-medium">Jelajahi Blog</Link>
+            <Link href="/about" className="rounded-xl px-4 py-2 border border-white/20 text-sm">Tentang Penulis</Link>
           </div>
         </div>
       </section>
@@ -32,7 +30,7 @@ export default function Home() {
           <h2 className="text-xl font-semibold mb-4">Pilihan Unggulan</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {featured.map((p) => (
-              <PostCard key={p.slug} post={p} />
+              <div key={p.slug} className="card-3d"><PostCard post={p} /></div>
             ))}
           </div>
         </section>
@@ -45,7 +43,7 @@ export default function Home() {
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {recent.map((p) => (
-            <PostCard key={p.slug} post={p} />
+            <div key={p.slug} className="card-3d"><PostCard post={p} /></div>
           ))}
         </div>
       </section>
@@ -55,7 +53,7 @@ export default function Home() {
           <h2 className="text-xl font-semibold mb-3">Kategori</h2>
           <div className="flex flex-wrap gap-2">
             {categories.map((c) => (
-              <Link key={c} href={`/blog/category/${c}`} className="rounded-full bg-black/5 dark:bg-white/10 px-3 py-1 text-sm">
+              <Link key={c} href={`/blog/category/${c}`} className="rounded-full bg-black/20 border border-white/10 px-3 py-1 text-sm">
                 {c}
               </Link>
             ))}
