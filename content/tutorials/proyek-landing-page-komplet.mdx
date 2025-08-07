@@ -1,0 +1,301 @@
+---
+title: "Proyek Mini: Landing Page Komplet (HTML + CSS + JavaScript)"
+description: "Bangun landing page modern dari nol: struktur semantik, sistem desain, komponen UI, animasi, dark mode, scrollspy, form, dan optimasi."
+date: "2025-08-07"
+tags: ["html", "css", "javascript", "landing-page", "frontend"]
+category: "tutorial"
+featured: true
+---
+
+Tujuan: membangun landing page modern yang rapi, performa baik, aksesibel, dan siap produksi. Kita gabungkan seluruh dasar HTML, CSS, dan JavaScript yang sudah dipelajari, lalu sedikit "overengineering" untuk rasa profesional.
+
+Hasil akhir mencakup:
+- Header sticky + active link (scrollspy)
+- Hero dengan gradient + glassmorphism
+- Grid cards (fitur) + hover 3D subtle
+- Testimonial carousel sederhana
+- FAQ accordion
+- Contact form dengan validasi
+- Dark mode toggle (persist ke `localStorage`)
+- Animasi masuk konten saat scroll (IntersectionObserver)
+
+Struktur direktori minimal:
+
+```text
+public/
+  images/
+    avatar-1.jpg
+    avatar-2.jpg
+index.html
+styles.css
+app.js
+```
+
+1) HTML semantik dengan section jelas
+
+```html
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Acme — Meningkatkan Produktivitas Anda</title>
+    <meta name="description" content="Landing page modern: fitur, testimoni, dan kontak." />
+    <link rel="stylesheet" href="/styles.css" />
+    <script defer src="/app.js"></script>
+  </head>
+  <body>
+    <header class="header" id="top">
+      <nav class="nav container">
+        <a class="logo" href="#top">Acme</a>
+        <button class="theme-toggle" aria-label="Toggle tema" id="themeToggle">🌓</button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#features" class="nav-link">Fitur</a></li>
+          <li><a href="#testimonials" class="nav-link">Testimoni</a></li>
+          <li><a href="#faq" class="nav-link">FAQ</a></li>
+          <li><a href="#contact" class="nav-link btn btn-primary">Kontak</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero container">
+        <div class="hero-content reveal">
+          <p class="badge">Baru • Lebih cepat dan sederhana</p>
+          <h1>Meningkatkan produktivitas, tanpa menambah keribetan.</h1>
+          <p class="lede">Kelola kerja harian, kolaborasi, dan dokumentasi dalam satu tempat. Cepat, intuitif, dan cantik.</p>
+          <div class="actions">
+            <a href="#features" class="btn btn-primary">Jelajahi Fitur</a>
+            <a href="#contact" class="btn">Hubungi Kami</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="section container">
+        <header class="section-header">
+          <h2>Fitur Unggulan</h2>
+          <p>Semua yang dibutuhkan untuk memulai — fokus ke hal yang penting.</p>
+        </header>
+        <div class="grid-3">
+          <article class="card tilt reveal">
+            <h3>Catatan Pintar</h3>
+            <p>Markdown, pencarian cepat, dan tag pintar.</p>
+          </article>
+          <article class="card tilt reveal">
+            <h3>Kanban Ringkas</h3>
+            <p>Pindah, filter, dan atur prioritas tanpa drama.</p>
+          </article>
+          <article class="card tilt reveal">
+            <h3>Integrasi</h3>
+            <p>Sinkron GitHub, Google Drive, dan Slack.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="testimonials" class="section container">
+        <header class="section-header">
+          <h2>Apa kata mereka</h2>
+        </header>
+        <div class="carousel reveal" aria-roledescription="carousel">
+          <div class="carousel-track" id="carouselTrack">
+            <figure class="testimonial">
+              <img src="/images/avatar-1.jpg" alt="Foto pelanggan" />
+              <blockquote>"Seketika kerja tim kami jadi runut dan enak diikuti."</blockquote>
+              <figcaption>Rani — Product Manager</figcaption>
+            </figure>
+            <figure class="testimonial">
+              <img src="/images/avatar-2.jpg" alt="Foto pelanggan" />
+              <blockquote>"UI-nya adem, performanya kencang. Recommended."</blockquote>
+              <figcaption>Yusuf — Engineer</figcaption>
+            </figure>
+          </div>
+          <div class="carousel-controls">
+            <button class="btn" id="prev">←</button>
+            <button class="btn" id="next">→</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" class="section container">
+        <header class="section-header">
+          <h2>Pertanyaan Umum</h2>
+        </header>
+        <details class="accordion reveal">
+          <summary>Apakah gratis?</summary>
+          <div>
+            <p>Gratis untuk tim kecil. Paket pro tersedia untuk kebutuhan skala besar.</p>
+          </div>
+        </details>
+        <details class="accordion reveal">
+          <summary>Apakah ada mobile app?</summary>
+          <div>
+            <p>Ada. Dukungan iOS dan Android, data sinkron dengan versi web.</p>
+          </div>
+        </details>
+      </section>
+
+      <section id="contact" class="section container">
+        <header class="section-header">
+          <h2>Hubungi Kami</h2>
+          <p>Kami akan membalas dalam 1x24 jam kerja.</p>
+        </header>
+        <form id="contactForm" class="form reveal" novalidate>
+          <label>
+            Nama
+            <input type="text" name="name" required minlength="3" />
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" required />
+          </label>
+          <label>
+            Pesan
+            <textarea name="message" rows="5" required minlength="10"></textarea>
+          </label>
+          <button class="btn btn-primary" type="submit">Kirim</button>
+          <p class="form-note" id="formNote" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>© 2025 Acme. Semua hak dilindungi.</p>
+      </div>
+    </footer>
+  </body>
+  </html>
+```
+
+2) CSS: sistem desain, dark mode, layout, animasi
+
+```css
+:root {
+  --bg: #0b0b0b;
+  --fg: #e7e7e7;
+  --muted: #a1a1aa;
+  --card: #111113;
+  --primary: #60a5fa; /* sky-400 */
+  --ring: #7c3aed; /* violet-600 */
+}
+html { color-scheme: dark; }
+body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background: var(--bg); color: var(--fg); }
+.container { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+.header { position: sticky; top: 0; backdrop-filter: blur(10px); background: color-mix(in oklab, var(--bg), transparent 65%); border-bottom: 1px solid #222; z-index: 50; }
+.nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.logo { font-weight: 700; letter-spacing: -0.02em; }
+.nav-links { display: flex; align-items: center; gap: 16px; list-style: none; margin: 0; padding: 0; }
+.nav-link { color: var(--fg); text-decoration: none; opacity: 0.8; }
+.nav-link.active { opacity: 1; text-decoration: underline; text-underline-offset: 6px; text-decoration-color: color-mix(in oklab, var(--primary), transparent 40%); }
+.theme-toggle { background: transparent; border: 1px solid #222; color: var(--fg); border-radius: 10px; padding: 6px 10px; }
+
+.hero { padding: 96px 0; position: relative; }
+.badge { display: inline-block; font-size: 12px; opacity: .85; padding: 6px 10px; border: 1px solid #2a2a2a; border-radius: 999px; background: #141414; }
+.hero h1 { margin: 12px 0 8px; font-size: clamp(32px, 6vw, 48px); letter-spacing: -0.02em; }
+.lede { color: var(--muted); max-width: 56ch; }
+.actions { display: flex; gap: 12px; margin-top: 16px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 14px; border-radius: 12px; border: 1px solid #2a2a2a; color: var(--fg); text-decoration: none; }
+.btn-primary { background: linear-gradient(90deg, var(--primary), var(--ring)); border: none; color: black; font-weight: 600; }
+
+.section { padding: 72px 0; }
+.section-header { margin-bottom: 24px; }
+.section-header h2 { margin: 0 0 6px; letter-spacing: -0.02em; }
+.section-header p { color: var(--muted); }
+
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 900px) { .grid-3 { grid-template-columns: 1fr; } }
+
+.card { background: color-mix(in oklab, var(--card), transparent 10%); border: 1px solid #222; border-radius: 16px; padding: 20px; transition: transform .15s ease, box-shadow .15s ease; }
+.card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,.35); }
+.tilt { transform-style: preserve-3d; }
+
+.carousel { position: relative; overflow: hidden; }
+.carousel-track { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(280px, 1fr); gap: 16px; scroll-snap-type: x mandatory; overflow-x: auto; padding-bottom: 8px; }
+.testimonial { scroll-snap-align: start; background: #121212; border: 1px solid #222; border-radius: 16px; padding: 16px; }
+.testimonial img { width: 48px; height: 48px; border-radius: 999px; object-fit: cover; }
+.carousel-controls { margin-top: 8px; display: flex; gap: 8px; }
+
+.accordion { background: #111; border: 1px solid #222; border-radius: 12px; padding: 12px 16px; }
+.accordion + .accordion { margin-top: 12px; }
+.accordion summary { cursor: pointer; }
+
+.form { display: grid; gap: 12px; max-width: 560px; }
+.form input, .form textarea { width: 100%; padding: 10px 12px; border-radius: 12px; border: 1px solid #2a2a2a; background: #0f0f0f; color: var(--fg); }
+.form-note { color: var(--muted); margin-top: 6px; }
+
+.footer { border-top: 1px solid #222; padding: 24px 0; margin-top: 48px; }
+
+/* animasi reveal saat scroll */
+.reveal { opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease; }
+.reveal.revealed { opacity: 1; transform: none; }
+```
+
+3) JavaScript: theme, scrollspy, reveal, carousel, validasi form
+
+```js
+// theme toggle
+const themeToggle = document.getElementById('themeToggle');
+const root = document.documentElement;
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) root.classList.toggle('light', savedTheme === 'light');
+themeToggle?.addEventListener('click', () => {
+  const isLight = root.classList.toggle('light');
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+});
+
+// scrollspy aktifkan link berdasarkan section terlihat
+const links = Array.from(document.querySelectorAll('.nav-link'));
+const sections = links.map(l => document.querySelector(l.getAttribute('href')));
+const spy = new IntersectionObserver((entries) => {
+  for (const entry of entries) {
+    const idx = sections.indexOf(entry.target);
+    if (idx >= 0) {
+      links[idx].classList.toggle('active', entry.isIntersecting);
+    }
+  }
+}, { rootMargin: '-40% 0px -55% 0px', threshold: 0.01 });
+sections.forEach(s => s && spy.observe(s));
+
+// reveal elements
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e) => e.target.classList.toggle('revealed', e.isIntersecting));
+}, { threshold: 0.12 });
+reveals.forEach(el => io.observe(el));
+
+// tilt card subtle
+document.querySelectorAll('.tilt').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const r = card.getBoundingClientRect();
+    const rx = (e.clientY - r.top) / r.height - 0.5;
+    const ry = (e.clientX - r.left) / r.width - 0.5;
+    card.style.transform = `rotateX(${rx * -4}deg) rotateY(${ry * 4}deg)`;
+  });
+  card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+});
+
+// carousel
+const track = document.getElementById('carouselTrack');
+document.getElementById('prev')?.addEventListener('click', () => track?.scrollBy({ left: -300, behavior: 'smooth' }));
+document.getElementById('next')?.addEventListener('click', () => track?.scrollBy({ left: 300, behavior: 'smooth' }));
+
+// form validation
+const form = document.getElementById('contactForm');
+const note = document.getElementById('formNote');
+form?.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const fd = new FormData(form);
+  const name = String(fd.get('name') || '').trim();
+  const email = String(fd.get('email') || '').trim();
+  const message = String(fd.get('message') || '').trim();
+  if (name.length < 3) return (note.textContent = 'Nama minimal 3 karakter');
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return (note.textContent = 'Format email tidak valid');
+  if (message.length < 10) return (note.textContent = 'Pesan terlalu singkat');
+  note.textContent = 'Terkirim! (simulasi)';
+});
+```
+
+Selesai. Anda bisa menaruh berkas ini sebagai contoh proyek mini lengkap. Silakan modifikasi copywriting dan aset sesuai brand Anda.
+
+
