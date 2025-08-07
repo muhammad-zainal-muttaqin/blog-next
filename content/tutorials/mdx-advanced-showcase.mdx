@@ -1,0 +1,62 @@
+---
+title: "MDX Lanjutan: Anchor Heading, Callout, dan GFM"
+description: "Demo fitur baru: heading ber-anchor otomatis, komponen MDX, tabel GFM, task list, dan code block yang nyaman dibaca."
+date: "2025-08-09"
+tags: ["mdx", "ux", "tips"]
+category: "tutorial"
+featured: false
+---
+
+> Post ini mendemokan fitur MDX baru di blog: tipografi premium, anchor heading, Callout, GFM, dan peningkatan code block.
+
+## Mengapa MDX?
+
+MDX memungkinkan kita menulis konten Markdown yang bisa menyisipkan komponen React. Hasilnya: konten tetap ringan, tapi bisa interaktif dan konsisten secara desain.
+
+## Anchor Heading Otomatis
+
+Setiap `h2`/`h3` sekarang memiliki anchor otomatis. Coba klik simbol ¶ di sebelah judul untuk menyalin tautan bagian ini.
+
+## Callout Komponen
+
+<Callout>
+Tips: Gunakan Callout untuk menekankan hal penting tanpa memecah fokus pembaca.
+</Callout>
+
+## Tabel (GFM)
+
+| Fitur        | Status |
+|--------------|--------|
+| Anchor link  | ✅     |
+| Callout      | ✅     |
+| Task list    | ✅     |
+
+## Task List (GFM)
+
+- [x] Tambah anchor pada heading
+- [x] Komponen Callout
+- [x] Styling code block gelap
+- [ ] Komponen interaktif lanjutan (segera)
+
+## Contoh Kode
+
+```ts
+// util/slug.ts
+export function toSlug(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
+}
+```
+
+```html
+<!-- Anchor link di heading akan otomatis dibuat via rehype-autolink-headings -->
+<h2 id="contoh">Contoh</h2>
+```
+
+## Penutup
+
+Dengan fondasi ini, konten lebih nyaman dibaca, konsisten, dan mudah dinavigasi. Selanjutnya kita bisa menambah komponen interaktif (demo, sandpack, dsb.) untuk pengalaman belajar yang lebih kaya.
+
