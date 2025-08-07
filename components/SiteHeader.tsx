@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Menu, Search, Rss } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function SiteHeader() {
   return (
@@ -27,6 +28,7 @@ export default function SiteHeader() {
             <Search className="h-4 w-4" />
             <span>Search</span>
           </Link>
+          <ThemeToggle />
         </nav>
       </div>
     </header>

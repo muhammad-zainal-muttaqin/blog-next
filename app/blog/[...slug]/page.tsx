@@ -29,7 +29,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <h1 className="text-3xl font-bold tracking-tight mt-1">{meta.title}</h1>
         {meta.description && <p className="mt-2 text-black/70 dark:text-white/70">{meta.description}</p>}
       </header>
-      <div>{compiled.content}</div>
+      <div className="[&_pre]:rounded-xl [&_pre]:bg-zinc-900/90 [&_pre]:text-zinc-100 [&_pre]:p-4 [&_pre]:overflow-x-auto [&_code]:font-mono [&_code]:text-sm">
+        {compiled.content}
+      </div>
     </article>
   );
 }

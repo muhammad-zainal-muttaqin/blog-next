@@ -9,8 +9,15 @@ export default function Home() {
 
   return (
     <div className="space-y-10">
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-sky-100 via-white to-purple-100 dark:from-zinc-900 dark:via-black dark:to-zinc-900 p-10 border border-black/5 dark:border-white/10">
-        <div className="max-w-2xl">
+      <section className="relative overflow-hidden rounded-3xl border border-black/5 dark:border-white/10 p-10 bg-gradient-to-br from-zinc-50 via-white to-sky-50 dark:from-zinc-900 dark:via-black dark:to-zinc-900">
+        <div className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-sky-400/30 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-fuchsia-400/20 blur-3xl" />
+        <div className="relative max-w-2xl">
+          <div className="inline-flex items-center gap-2 rounded-full bg-black/5 dark:bg-white/10 px-3 py-1 text-xs mb-4">
+            <span>Next.js 15</span>
+            <span>MDX</span>
+            <span>Tailwind</span>
+          </div>
           <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">Tulisan yang sederhana, bermanfaat, dan to the point.</h1>
           <p className="mt-3 text-black/70 dark:text-white/70">Journal, tutorial, dan opini seputar teknologi dan kehidupan. Ditulis ringan dan KISS.</p>
           <div className="mt-6 flex gap-3">
